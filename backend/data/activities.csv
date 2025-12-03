@@ -1,0 +1,61 @@
+city,activity_name,cost_usd,category,ideal_weather,description
+Madrid,Museo del Prado,15,cultura,any,"El museo de arte más importante de España con obras de Goya, Velázquez y El Greco"
+Madrid,Palacio Real,12,cultura,any,"Residencia oficial del Rey de España, uno de los palacios más grandes de Europa"
+Madrid,Parque del Retiro,0,aventura,sunny,"Parque histórico perfecto para caminar, remar en bote y disfrutar de la naturaleza"
+Madrid,Plaza Mayor,0,cultura,any,"Plaza histórica del siglo XVII, corazón de Madrid con arquitectura barroca"
+Madrid,Tapas Tour,45,gastronomia,any,Recorrido gastronómico por bares tradicionales probando tapas y vinos españoles
+Madrid,Estadio Santiago Bernabéu,25,deportes,any,"Visita al estadio del Real Madrid, uno de los clubes de fútbol más famosos del mundo"
+New York,Estatua de la Libertad,24,cultura,any,"Monumento icónico de Nueva York, símbolo de libertad y democracia"
+New York,Central Park,0,aventura,sunny,"Parque urbano más grande de Manhattan, ideal para caminar, correr y relajarse"
+New York,Museo Metropolitano,30,cultura,any,Uno de los museos de arte más grandes del mundo con colecciones de todas las épocas
+New York,Empire State Building,38,cultura,any,Rascacielos histórico con vistas panorámicas de toda la ciudad
+New York,Broadway Show,120,entretenimiento,any,Espectáculo de teatro musical en el distrito teatral más famoso del mundo
+New York,High Line,0,aventura,sunny,Parque elevado construido sobre una línea de ferrocarril abandonada
+Miami,South Beach,0,aventura,sunny,"Playa icónica con arena blanca, aguas turquesas y arquitectura Art Deco"
+Miami,Art Deco Historic District,0,cultura,any,"Distrito con más de 800 edificios Art Deco de los años 30 y 40"
+Miami,Wynwood Walls,12,cultura,any,Galería al aire libre con murales de arte callejero de artistas internacionales
+Miami,Key West Day Trip,150,aventura,sunny,"Excursión a las islas Keys, el punto más al sur de Estados Unidos continental"
+Miami,Little Havana Food Tour,65,gastronomia,any,Recorrido culinario por el barrio cubano probando comida auténtica y café cubano
+Miami,Acuario de Miami,35,aventura,any,Acuario con más de 500 especies marinas y shows de delfines
+Santiago,Palacio de La Moneda,0,cultura,any,"Sede del gobierno chileno, palacio neoclásico del siglo XVIII"
+Santiago,Cerro San Cristóbal,0,aventura,sunny,"Colina con vista panorámica de la ciudad, accesible por funicular o teleférico"
+Santiago,Museo de la Memoria,0,cultura,any,Museo dedicado a la memoria de las víctimas de la dictadura militar
+Santiago,Barrio Lastarria,0,cultura,any,"Barrio bohemio con galerías de arte, cafés y arquitectura histórica"
+Santiago,Viña Concha y Toro,25,gastronomia,any,Visita a una de las viñas más famosas de Chile con degustación de vinos
+Santiago,Valle Nevado,80,aventura,any,"Centro de esquí en la cordillera de los Andes, abierto todo el año"
+Lima,Centro Histórico,0,cultura,any,Patrimonio de la Humanidad UNESCO con arquitectura colonial española
+Lima,Museo Larco,12,cultura,any,Museo con la mejor colección de arte precolombino del Perú
+Lima,Barranco,0,cultura,any,"Barrio bohemio con arte callejero, galerías y vida nocturna"
+Lima,Circuito Mágico del Agua,4,entretenimiento,any,Parque con 13 fuentes ornamentales y espectáculo de luces y música
+Lima,Comida Peruana Tour,55,gastronomia,any,"Recorrido culinario probando ceviche, causa limeña y otros platos peruanos"
+Lima,Paracas y Líneas de Nazca,180,aventura,sunny,"Excursión a las misteriosas líneas de Nazca y reserva natural de Paracas"
+Rio de Janeiro,Cristo Redentor,25,cultura,any,"Estatua icónica de Cristo en la cima del Corcovado, una de las 7 maravillas"
+Rio de Janeiro,Playa de Copacabana,0,aventura,sunny,"Playa más famosa de Brasil con 4 km de arena blanca"
+Rio de Janeiro,Pão de Açúcar,30,cultura,any,Teleférico hasta la cima del Pan de Azúcar con vistas espectaculares
+Rio de Janeiro,Sambódromo,20,cultura,any,"Estadio donde se realiza el Carnaval de Río, visita guiada disponible"
+Rio de Janeiro,Feijoada Experience,40,gastronomia,any,"Comida tradicional brasileña, plato nacional con frijoles y carne"
+Rio de Janeiro,Favela Tour,35,cultura,any,"Visita guiada a comunidades locales para entender la cultura carioca"
+Paris,Torre Eiffel,29,cultura,any,"Monumento más icónico de París, símbolo de la ciudad de la luz"
+Paris,Museo del Louvre,17,cultura,any,"El museo más visitado del mundo, hogar de la Mona Lisa y Venus de Milo"
+Paris,Notre-Dame,0,cultura,any,"Catedral gótica medieval, obra maestra de la arquitectura francesa"
+Paris,Champs-Élysées,0,cultura,any,"Avenida más famosa de París con tiendas, cafés y el Arco del Triunfo"
+Paris,Crucero por el Sena,15,aventura,any,"Paseo en barco por el río Sena viendo los monumentos de París"
+Paris,Barrio de Montmartre,0,cultura,any,"Barrio bohemio con la Basílica del Sacré-Cœur y artistas callejeros"
+Barcelona,Sagrada Familia,26,cultura,any,"Obra maestra inacabada de Gaudí, basílica modernista única en el mundo"
+Barcelona,Park Güell,10,cultura,any,"Parque diseñado por Gaudí con arquitectura modernista y mosaicos coloridos"
+Barcelona,Las Ramblas,0,cultura,any,"Paseo peatonal más famoso de Barcelona con artistas, tiendas y restaurantes"
+Barcelona,Casa Batlló,35,cultura,any,"Edificio modernista de Gaudí con fachada inspirada en el mar"           
+Barcelona,Barrio Gótico,0,cultura,any,"Centro histórico medieval con calles estrechas y arquitectura gótica"
+Barcelona,Paella y Tapas Tour,50,gastronomia,any,"Recorrido gastronómico probando paella, tapas y vinos catalanes"
+Rome,Coliseo,18,cultura,any,"Anfiteatro romano más grande del mundo, símbolo del Imperio Romano"
+Rome,Foro Romano,18,cultura,any,"Ruinas del centro político y religioso de la antigua Roma"
+Rome,Fontana de Trevi,0,cultura,any,"Fuente barroca más famosa de Roma, tradición de lanzar monedas"
+Rome,Vaticano y Capilla Sixtina,27,cultura,any,"Museos del Vaticano con la Capilla Sixtina pintada por Miguel Ángel"
+Rome,Panteón,0,cultura,any,"Templo romano mejor conservado, convertido en iglesia cristiana"
+Rome,Gelato Tour,35,gastronomia,any,"Recorrido probando los mejores helados artesanales de Roma"
+London,Big Ben y Parlamento,0,cultura,any,"Palacio de Westminster y el reloj más famoso del mundo"
+London,London Eye,32,cultura,any,"Noria gigante con vistas panorámicas de 360 grados de Londres"
+London,Museo Británico,0,cultura,any,"Uno de los museos más grandes del mundo con artefactos de todas las culturas"
+London,Torre de Londres,33,cultura,any,"Fortaleza histórica que alberga las Joyas de la Corona"
+London,Hyde Park,0,aventura,sunny,"Parque real más grande de Londres, ideal para caminar y relajarse"
+London,Afternoon Tea,45,gastronomia,any,"Tradición británica de té de la tarde con sándwiches y pasteles"
