@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from app.legacy_agent import create_legacy_agent
 from langchain.messages import HumanMessage
-from tests.legacy_agent_tests.test_cases import ALL_TEST_CASES, TestCase, TEST_CASES_BY_ID
+from tests.legacy_agent_tests.test_cases import TEST_CASES, TestCase, TEST_CASES_BY_ID
 
 load_dotenv()
 
@@ -110,7 +110,7 @@ class TestRunner:
     
     def run_all_tests(self, test_cases: Optional[List[TestCase]] = None) -> List[TestResult]:
         if test_cases is None:
-            test_cases = ALL_TEST_CASES
+            test_cases = TEST_CASES
         
         for i, test_case in enumerate(test_cases, 1):
             print(f"\n[{i}/{len(test_cases)}] {test_case.id}: {test_case.description}")

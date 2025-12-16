@@ -1,7 +1,7 @@
 import os
 from typing import Optional
 from langchain.agents import create_agent
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 from langfuse.langchain  import CallbackHandler
 import pandas as pd
 import requests
@@ -244,9 +244,10 @@ def create_legacy_agent(enable_langfuse: bool = True):
     Returns:
         A LangChain agent configured with the LLM and tools.
     """
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
-        google_api_key=os.getenv("GOOGLE_API_KEY")
+    llm = ChatOpenAI(
+        model=os.getenv("OPENROUTER_MODEL", "anthropic/claude-3.5-sonnet"),
+        openai_api_key=os.getenv("OPENROUTER_API_KEY"),
+        openai_api_base="https://openrouter.ai/api/v1",
     )
 
     tools = [search_flights, search_activities, get_weather, convert_usd_to_ars]
