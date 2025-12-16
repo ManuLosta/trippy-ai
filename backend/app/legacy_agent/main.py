@@ -2,8 +2,12 @@ import os
 from typing import Optional
 from langchain.agents import create_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langfuse.langchain  import CallbackHandler
 import pandas as pd
 import requests
+from dotenv import load_dotenv
+load_dotenv()
+
 
 def search_flights(destination: str, max_price: Optional[float] = None) -> str:
     """Search for flights to a specific destination from Buenos Aires.
@@ -208,7 +212,38 @@ def convert_usd_to_ars(amount_usd: float) -> str:
 
 
 
-def create_legacy_agent():
+def _get_langfuse_handler():
+    """Create and return a Langfuse callback handler if credentials are configured.
+    
+    The CallbackHandler automatically reads credentials from environment variables:
+    - LANGFUSE_SECRET_KEY
+    - LANGFUSE_PUBLIC_KEY
+    - LANGFUSE_HOST (optional, defaults to https://cloud.langfuse.com)
+    """
+    secret_key = os.getenv("LANGFUSE_SECRET_KEY")
+    public_key = os.getenv("LANGFUSE_PUBLIC_KEY")
+    
+    if not secret_key or not public_key:
+        return None
+    
+    try:
+        # CallbackHandler automatically reads from environment variables
+        return CallbackHandler()
+    except Exception as e:
+        print(f"Warning: Failed to initialize Langfuse callback handler: {e}")
+        return None
+
+
+def create_legacy_agent(enable_langfuse: bool = True):
+    """Create a legacy agent with optional Langfuse tracing.
+    
+    Args:
+        enable_langfuse: If True, enables Langfuse tracing if credentials are configured.
+                        Defaults to True.
+    
+    Returns:
+        A LangChain agent configured with the LLM and tools.
+    """
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
         google_api_key=os.getenv("GOOGLE_API_KEY")
@@ -216,4 +251,31 @@ def create_legacy_agent():
 
     tools = [search_flights, search_activities, get_weather, convert_usd_to_ars]
 
-    return create_agent(llm, tools)
+    agent = create_agent(llm, tools)
+    
+    # Store langfuse handler for later use
+    if enable_langfuse:
+        agent._langfuse_handler = _get_langfuse_handler()
+    
+    return agent
+
+
+def invoke_with_langfuse(agent, input_data):
+    """Invoke the agent with Langfuse tracing if available.
+    
+    Args:
+        agent: The agent returned by create_legacy_agent
+        input_data: Input data (dict with "messages" key for LangChain agents)
+    
+    Returns:
+        Agent response
+    """
+    langfuse_handler = getattr(agent, '_langfuse_handler', None)
+    
+    if langfuse_handler:
+        # Use LangChain's RunnableConfig to pass callbacks
+        from langchain_core.runnables import RunnableConfig
+        config = RunnableConfig(callbacks=[langfuse_handler])
+        return agent.invoke(input_data, config=config)
+    else:
+        return agent.invoke(input_data)
