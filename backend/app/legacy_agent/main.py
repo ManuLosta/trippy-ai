@@ -1,4 +1,7 @@
+import os
 from typing import Optional
+from langchain.agents import create_agent
+from langchain_google_genai import ChatGoogleGenerativeAI
 import pandas as pd
 import requests
 
@@ -203,3 +206,14 @@ def convert_usd_to_ars(amount_usd: float) -> str:
         amount_ars = amount_usd * fallback_rate
         return f"${amount_usd:.2f} USD = ${amount_ars:.2f} ARS (approximate rate: {fallback_rate})"
 
+
+
+def create_legacy_agent():
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash",
+        google_api_key=os.getenv("GOOGLE_API_KEY")
+    )
+
+    tools = [search_flights, search_activities, get_weather, convert_usd_to_ars]
+
+    return create_agent(llm, tools)

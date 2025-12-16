@@ -36,6 +36,7 @@ dependencies = [
     { name = "langgraph" },
     { name = "load-dotenv" },
     { name = "pandas" },
+    { name = "requests" },
 ]
 
 [package.metadata]
@@ -44,6 +45,7 @@ requires-dist = [
     { name = "langgraph", specifier = ">=1.0.4" },
     { name = "load-dotenv", specifier = ">=0.1.0" },
     { name = "pandas", specifier = ">=2.3.3" },
+    { name = "requests", specifier = ">=2.31.0" },
 ]
 
 [[package]]

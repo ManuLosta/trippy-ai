@@ -9,4 +9,5 @@ dependencies = [
     "langgraph>=1.0.4",
     "load-dotenv>=0.1.0",
     "pandas>=2.3.3",
+    "requests>=2.31.0",
 ]
