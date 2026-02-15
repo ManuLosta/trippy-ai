@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import type { FormEvent, KeyboardEvent } from "react"
+import ReactMarkdown from "react-markdown"
 
 type MessageRole = "user" | "assistant"
 
@@ -485,7 +486,6 @@ export default function App() {
               </button>
               <p className="text-sm text-[#e4e4e4]">{activeConversation?.title ?? "Nuevo chat"}</p>
             </div>
-            <p className="text-xs text-[#9a9a9a]">Travel planner mode</p>
           </header>
 
           <section
@@ -529,9 +529,41 @@ export default function App() {
                           T
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="whitespace-pre-wrap text-[15px] leading-7 text-[#e7e7e7]">
-                            {message.content}
-                          </p>
+                          <div className="prose prose-invert max-w-none text-[15px] leading-7">
+                            <ReactMarkdown
+                              components={{
+                                h1: ({ children }) => <h1 className="text-2xl font-bold mt-4 mb-2 first:mt-0">{children}</h1>,
+                                h2: ({ children }) => <h2 className="text-xl font-semibold mt-3 mb-2 first:mt-0">{children}</h2>,
+                                h3: ({ children }) => <h3 className="text-lg font-semibold mt-2 mb-1 first:mt-0">{children}</h3>,
+                                h4: ({ children }) => <h4 className="text-base font-semibold mt-2 mb-1 first:mt-0">{children}</h4>,
+                                p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
+                                ul: ({ children }) => <ul className="list-disc ml-4 mb-3 space-y-1">{children}</ul>,
+                                ol: ({ children }) => <ol className="list-decimal ml-4 mb-3 space-y-1">{children}</ol>,
+                                li: ({ children }) => <li className="ml-1">{children}</li>,
+                                blockquote: ({ children }) => <blockquote className="border-l-4 border-[#10a37f] pl-4 italic my-3">{children}</blockquote>,
+                                code: ({ children, className }) => {
+                                  const isInline = !className;
+                                  return isInline ? (
+                                    <code className="bg-[#3a3a3a] px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>
+                                  ) : (
+                                    <code className={className}>{children}</code>
+                                  );
+                                },
+                                pre: ({ children }) => <pre className="bg-[#1a1a1a] border border-white/10 rounded-lg p-4 overflow-x-auto my-3">{children}</pre>,
+                                table: ({ children }) => <div className="overflow-x-auto my-3"><table className="border-collapse border border-white/10 w-full">{children}</table></div>,
+                                thead: ({ children }) => <thead className="bg-[#2a2a2a]">{children}</thead>,
+                                tbody: ({ children }) => <tbody>{children}</tbody>,
+                                tr: ({ children }) => <tr className="border-b border-white/10">{children}</tr>,
+                                th: ({ children }) => <th className="border border-white/10 px-3 py-2 text-left font-semibold">{children}</th>,
+                                td: ({ children }) => <td className="border border-white/10 px-3 py-2">{children}</td>,
+                                a: ({ children, href }) => <a href={href} className="text-[#10a37f] hover:underline" target="_blank" rel="noopener noreferrer">{children}</a>,
+                                strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+                                em: ({ children }) => <em className="italic">{children}</em>,
+                              }}
+                            >
+                              {message.content}
+                            </ReactMarkdown>
+                          </div>
                           <p className="mt-2 text-xs text-[#8f8f8f]">
                             {formatTime(message.createdAt)}
                           </p>
