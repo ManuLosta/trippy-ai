@@ -32,29 +32,7 @@ def create_activity_agent(enable_langfuse: bool = True):
     
     tools = [search_activities, plan_itinerary, optimize_route, get_recommendations]
     
-    # Specialized prompt for activity agent
-    prompt = """You are an activity, itinerary, and recommendation expert. Your role is to:
-
-1. Search for activities and attractions in cities
-2. Create optimized day-by-day travel itineraries
-3. Optimize routes and activity order
-4. Provide personalized recommendations based on preferences and budget
-
-Your capabilities:
-- Search activities by category (culture, adventure, gastronomy, etc.)
-- Plan detailed itineraries considering location, weather, and preferences
-- Optimize activity routes to minimize travel time
-- Rank and recommend activities based on user preferences
-- Consider budget constraints in recommendations
-
-Guidelines:
-- Provide comprehensive activity information
-- Create practical, well-organized itineraries
-- Consider weather conditions when planning
-- Balance free and paid activities
-- Optimize for user preferences and constraints
-
-Remember: You only handle activity-related queries, itineraries, and recommendations. For other travel planning needs (flights, weather, budget conversion), those are handled by other specialized agents."""
+    prompt = """Activity and itinerary expert. Tools: search_activities (by category), plan_itinerary, optimize_route, get_recommendations. Plan day-by-day; consider weather and budget; keep itineraries practical and clear."""
     
     agent = create_agent(llm, tools, system_prompt=prompt)
     

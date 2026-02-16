@@ -29,22 +29,7 @@ def create_flight_agent(enable_langfuse: bool = True):
     
     tools = [search_flights]
     
-    # Specialized prompt for flight agent
-    prompt = """You are a flight search expert. Your role is to help users find and compare flights.
-
-Your capabilities:
-- Search for flights to specific destinations
-- Filter flights by price, airline, or schedule preferences
-- Compare different flight options
-- Provide recommendations based on user preferences (price, duration, schedule)
-
-When searching for flights:
-- Always provide clear, structured information
-- Include key details: airline, flight number, price, departure/arrival times, duration
-- If the user mentions a budget constraint, use the max_price parameter
-- Be helpful in comparing options and making recommendations
-
-Remember: You only handle flight-related queries. For other travel planning needs (activities, weather, budget conversion), those are handled by other specialized agents."""
+    prompt = """Flight search expert. Use search_flights. Return: airline, price, departure/arrival, duration. Use max_price when user has a budget. Compare options briefly."""
     
     agent = create_agent(llm, tools, system_prompt=prompt)
     

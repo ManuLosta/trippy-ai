@@ -166,11 +166,16 @@ def call_budget_agent(query: str) -> str:
 
 
 
+# Use a small/fast model for routing to save tokens and latency (optional)
+_SUPERVISOR_MODEL = os.getenv("OPENROUTER_FAST_MODEL") or os.getenv("OPENROUTER_MODEL", "anthropic/claude-3.5-sonnet")
+
+
 def create_supervisor_agent(enable_langfuse: bool = True):
     """Create the supervisor agent that coordinates all specialized agents.
     
     The supervisor uses the Tool Calling pattern, where each specialized agent
     is exposed as a tool that the supervisor can invoke when needed.
+    Uses OPENROUTER_FAST_MODEL when set (e.g. openai/gpt-4o-mini) to reduce tokens and latency.
     
     Args:
         enable_langfuse: If True, enables Langfuse tracing if configured.
@@ -179,10 +184,10 @@ def create_supervisor_agent(enable_langfuse: bool = True):
         A LangChain agent configured as the supervisor.
     """
     llm = ChatOpenAI(
-        model=os.getenv("OPENROUTER_MODEL", "anthropic/claude-3.5-sonnet"),
+        model=_SUPERVISOR_MODEL,
         openai_api_key=os.getenv("OPENROUTER_API_KEY"),
         openai_api_base="https://openrouter.ai/api/v1",
-        temperature=0.3,  # Lower temperature for more consistent routing decisions
+        temperature=0.2,  # Low for consistent routing
     )
     
     # All specialized agents as tools
@@ -193,30 +198,13 @@ def create_supervisor_agent(enable_langfuse: bool = True):
         call_budget_agent,
     ]
     
-    # Supervisor prompt
-    prompt = """You are a travel planning supervisor that coordinates specialized agents.
+    prompt = """Travel planning coordinator. You route to the right agent(s):
+- flight_agent: search/compare flights, filter by price or schedule
+- activity_agent: activities, itineraries, recommendations, route optimization
+- weather_agent: forecasts, plan by weather
+- budget_agent: USD↔ARS conversion, budget allocation
 
-You have access to 4 specialized agents:
-
-1. **flight_agent**: Searches for flights, compares options, filters by price
-2. **activity_agent**: Searches activities, creates itineraries, provides recommendations, optimizes routes
-3. **weather_agent**: Provides weather forecasts for activity planning
-4. **budget_agent**: Converts currencies and optimizes budget distribution
-
-Your role:
-- Understand the user's complete travel planning needs
-- Coordinate agents efficiently (flight → activity → weather → budget)
-- The activity_agent now handles itineraries and recommendations too
-- The budget_agent now handles budget optimization
-- Synthesize information into coherent travel plans
-
-Guidelines:
-- For complete travel plans: flight_agent → weather_agent → activity_agent (for itinerary) → budget_agent
-- For itineraries: activity_agent can handle search, planning, and optimization
-- For budget optimization: budget_agent handles both conversion and optimization
-- Provide comprehensive, well-organized responses
-
-Remember: You are the coordinator. Your job is to understand the full context of the user's request and orchestrate the appropriate specialized agents to provide a complete solution."""
+Call only agents needed (single query → one agent when possible). Synthesize results clearly."""
     
     agent = create_agent(llm, tools, system_prompt=prompt)
     

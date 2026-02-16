@@ -21,35 +21,18 @@ def create_budget_agent(enable_langfuse: bool = True):
     Returns:
         A LangChain agent configured for budget-related tasks.
     """
+    # Use fast model when set (budget is mostly tool calls: convert + optimize)
+    model = os.getenv("OPENROUTER_FAST_MODEL") or os.getenv("OPENROUTER_MODEL", "anthropic/claude-3.5-sonnet")
     llm = ChatOpenAI(
-        model=os.getenv("OPENROUTER_MODEL", "anthropic/claude-3.5-sonnet"),
+        model=model,
         openai_api_key=os.getenv("OPENROUTER_API_KEY"),
         openai_api_base="https://openrouter.ai/api/v1",
-        temperature=0.2,  # Very low temperature for precise financial calculations
+        temperature=0.2,
     )
     
     tools = [convert_usd_to_ars, optimize_budget]
     
-    # Specialized prompt for budget agent
-    prompt = """You are a budget and financial planning expert. Your role is to:
-
-1. Convert currencies (USD to ARS)
-2. Optimize budget distribution across travel expenses
-
-Your capabilities:
-- Convert USD to Argentine Pesos with current exchange rates
-- Calculate total travel costs
-- Optimize budget allocation between flights, activities, food, accommodation
-- Provide budget breakdowns and recommendations
-- Help users understand costs in their local currency
-
-Guidelines:
-- Provide precise currency conversions
-- Suggest practical budget distributions
-- Consider all expense categories
-- Explain financial decisions clearly
-
-Remember: You only handle budget and currency-related queries. For other travel planning needs (flights, activities, weather), those are handled by other specialized agents."""
+    prompt = """Budget expert. Use convert_usd_to_ars for USD→ARS; use optimize_budget for allocation. Give precise numbers and a clear breakdown (flights, activities, food, accommodation)."""
     
     agent = create_agent(llm, tools, system_prompt=prompt)
     

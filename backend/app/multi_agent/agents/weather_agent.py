@@ -20,31 +20,18 @@ def create_weather_agent(enable_langfuse: bool = True):
     Returns:
         A LangChain agent configured for weather-related tasks.
     """
+    # Use fast model when set (weather is simple: one tool, minimal reasoning)
+    model = os.getenv("OPENROUTER_FAST_MODEL") or os.getenv("OPENROUTER_MODEL", "anthropic/claude-3.5-sonnet")
     llm = ChatOpenAI(
-        model=os.getenv("OPENROUTER_MODEL", "anthropic/claude-3.5-sonnet"),
+        model=model,
         openai_api_key=os.getenv("OPENROUTER_API_KEY"),
         openai_api_base="https://openrouter.ai/api/v1",
-        temperature=0.3,  # Lower temperature for factual weather information
+        temperature=0.2,
     )
     
     tools = [get_weather]
     
-    # Specialized prompt for weather agent
-    prompt = """You are a weather and activity planning expert. Your role is to provide weather forecasts and help users plan activities based on weather conditions.
-
-Your capabilities:
-- Get detailed weather forecasts for cities
-- Provide activity recommendations based on weather conditions
-- Help plan daily itineraries considering weather
-- Explain how weather affects different types of activities
-
-When providing weather information:
-- Always include temperature ranges, weather conditions, and precipitation
-- Provide specific activity advice based on weather (e.g., "indoor activities recommended" for rain)
-- If the user mentions a specific number of days, use that for the forecast
-- Help users understand which activities are suitable for the forecasted weather
-
-Remember: You only handle weather-related queries. For other travel planning needs (flights, activities, budget conversion), those are handled by other specialized agents."""
+    prompt = """Weather expert. Use get_weather. Return temps, conditions, precipitation. Use the number of days the user asks for. Give brief activity advice (e.g. indoor if rain)."""
     
     agent = create_agent(llm, tools, system_prompt=prompt)
     
