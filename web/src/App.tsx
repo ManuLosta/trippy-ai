@@ -1,9 +1,10 @@
 import { useChatStore } from "@/hooks/use-chat-store"
-import { Sidebar } from "@/components/chat/Sidebar"
+import { AppSidebar } from "@/components/chat/AppSidebar"
 import { ChatHeader } from "@/components/chat/ChatHeader"
 import { ChatContent } from "@/components/chat/ChatContent"
 import { ChatComposer } from "@/components/chat/ChatComposer"
 import { NewConversationDialog } from "@/components/chat/NewConversationDialog"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
 export default function App() {
   const {
@@ -26,21 +27,20 @@ export default function App() {
   } = useChatStore()
 
   return (
-    <div className="h-screen bg-background text-foreground">
-      <div className="mx-auto flex h-full max-w-[1600px]">
-        <Sidebar
-          activeConversationId={activeConversation?.id ?? ""}
-          orderedConversations={orderedConversations}
-          activeConversation={activeConversation}
-          onNewConversation={createNewConversation}
-          onSelectConversation={selectConversation}
-          onDeleteConversation={deleteConversation}
-        />
+    <SidebarProvider className="h-screen w-full bg-background text-foreground">
+      <AppSidebar
+        activeConversationId={activeConversation?.id ?? ""}
+        orderedConversations={orderedConversations}
+        activeConversation={activeConversation}
+        onNewConversation={createNewConversation}
+        onSelectConversation={selectConversation}
+        onDeleteConversation={deleteConversation}
+      />
 
-        <main className="relative flex min-w-0 flex-1 flex-col">
+      <SidebarInset className="min-h-0">
+        <main className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
           <ChatHeader
             title={activeConversation?.title ?? "Nuevo chat"}
-            onNewConversation={createNewConversation}
           />
 
           <ChatContent
@@ -77,7 +77,7 @@ export default function App() {
             onCancel={closeNewConversationModal}
           />
         </main>
-      </div>
-    </div>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }

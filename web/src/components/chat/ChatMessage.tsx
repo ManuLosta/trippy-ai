@@ -16,7 +16,7 @@ export function UserMessage({ message }: { message: ChatMessageType }) {
 export function AssistantMessage({ message }: { message: ChatMessageType }) {
   return (
     <article className="flex gap-3">
-      <div className="mt-1 flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+      <div className="mt-1 hidden size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground md:flex">
         T
       </div>
       <div className="min-w-0 flex-1">
@@ -32,7 +32,7 @@ export function AssistantMessage({ message }: { message: ChatMessageType }) {
 export function LoadingIndicator() {
   return (
     <article className="flex gap-3">
-      <div className="mt-1 flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+      <div className="mt-1 hidden size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground md:flex">
         T
       </div>
       <div className="flex h-8 items-center gap-1 text-muted-foreground">

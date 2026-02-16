@@ -59,7 +59,7 @@ export function ChatComposer({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Preguntá lo que quieras sobre tu viaje"
+          placeholder="Preguntá sobre tu viaje"
           className={cn(
             "min-h-8 max-h-56 flex-1 resize-none border-0 bg-transparent px-1 py-1 text-[17px] leading-6 shadow-none focus-visible:ring-0 placeholder:text-muted-foreground dark:bg-transparent"
           )}

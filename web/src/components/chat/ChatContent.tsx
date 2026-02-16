@@ -29,7 +29,7 @@ export function ChatContent({
   return (
     <section
       ref={scrollRef}
-      className="flex-1 overflow-y-auto px-4 pb-44 pt-6 md:px-8"
+      className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 pb-44 pt-6 md:px-8"
     >
       <div className="mx-auto w-full max-w-3xl">
         {isEmpty ? (
