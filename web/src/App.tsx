@@ -19,6 +19,7 @@ export default function App() {
     activeConversation,
     createNewConversation,
     selectConversation,
+    deleteConversation,
     handleSend,
     setComposerFromPrompt,
     handleComposerKeyDown,
@@ -33,6 +34,7 @@ export default function App() {
           activeConversation={activeConversation}
           onNewConversation={createNewConversation}
           onSelectConversation={selectConversation}
+          onDeleteConversation={deleteConversation}
         />
 
         <main className="relative flex min-w-0 flex-1 flex-col">

@@ -58,6 +58,30 @@ export function useChatStore() {
     setError(null)
   }
 
+  const deleteConversation = (conversationId: string) => {
+    setStore((prev) => {
+      const next = prev.conversations.filter((c) => c.id !== conversationId)
+      const wasActive = prev.activeConversationId === conversationId
+      if (next.length === 0) {
+        const newConversation = createConversation()
+        return {
+          activeConversationId: newConversation.id,
+          conversations: [newConversation],
+        }
+      }
+      const nextActiveId = wasActive
+        ? [...next].sort((a, b) =>
+            b.updatedAt.localeCompare(a.updatedAt)
+          )[0].id
+        : prev.activeConversationId
+      return {
+        activeConversationId: nextActiveId,
+        conversations: next,
+      }
+    })
+    setError(null)
+  }
+
   const openNewConversationModal = () => setIsNewConversationModalOpen(true)
   const closeNewConversationModal = () => setIsNewConversationModalOpen(false)
 
@@ -172,6 +196,7 @@ export function useChatStore() {
     activeConversation,
     createNewConversation,
     selectConversation,
+    deleteConversation,
     handleSend,
     setComposerFromPrompt,
     handleComposerKeyDown,
