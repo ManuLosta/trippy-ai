@@ -89,9 +89,7 @@ export function AppSidebar({
       <Sidebar collapsible="offcanvas">
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 py-2">
-            <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-              T
-            </div>
+            <img src="./logo.svg" className="size-7 shrink-0" />
             <span className="truncate text-sm font-bold text-sidebar-foreground">
               Trippy AI
             </span>
