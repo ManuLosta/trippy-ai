@@ -26,7 +26,7 @@ export default function App() {
   } = useChatStore()
 
   return (
-    <div className="h-screen bg-background text-foreground dark">
+    <div className="h-screen bg-background text-foreground">
       <div className="mx-auto flex h-full max-w-[1600px]">
         <Sidebar
           activeConversationId={activeConversation?.id ?? ""}

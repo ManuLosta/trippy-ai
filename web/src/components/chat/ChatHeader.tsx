@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { ThemeSwitcher } from "@/components/theme-switcher"
 
 type ChatHeaderProps = {
   title: string
@@ -20,6 +21,7 @@ export function ChatHeader({ title, onNewConversation }: ChatHeaderProps) {
         </Button>
         <p className="text-sm text-foreground">{title}</p>
       </div>
+      <ThemeSwitcher />
     </header>
   )
 }
